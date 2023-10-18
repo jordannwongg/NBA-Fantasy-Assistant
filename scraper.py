@@ -15,7 +15,7 @@ def get_player_stats_for_season(year):
         player_data['field_goal_attempts_per_game'] = row.find('td', {'data-stat': 'fga_per_g'}).text
         player_data['free_throw_made_per_game'] = row.find('td', {'data-stat': 'ft_per_g'}).text
         player_data['free_throw_attempts_per_game'] = row.find('td', {'data-stat': 'fta_per_g'}).text
-        player_data['3s_made_per_game'] = row.find('td', {'data-stat': 'fg3_per_g'}).text
+        player_data['threes_made_per_game'] = row.find('td', {'data-stat': 'fg3_per_g'}).text
         player_data['rebounds_per_game'] = row.find('td', {'data-stat': 'trb_per_g'}).text
         player_data['assists_per_game'] = row.find('td', {'data-stat': 'ast_per_g'}).text
         player_data['steals_per_game'] = row.find('td', {'data-stat': 'stl_per_g'}).text

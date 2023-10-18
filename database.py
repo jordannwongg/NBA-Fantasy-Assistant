@@ -42,7 +42,7 @@ def insert_player_stats(stats, year):
         cursor.execute('''
         INSERT INTO {} (name, games, field_goal_made_per_game, field_goal_attempts_per_game, free_throw_made_per_game, free_throw_attempts_per_game, threes_made_per_game, rebounds_per_game, assists_per_game, steals_per_game, blocks_per_game, turnovers_per_game, points_per_game)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        '''.format(table_name), (player['name'], player['games'], player['field_goal_made_per_game'], player['field_goal_attempts_per_game'], player['free_throw_made_per_game'], player['free_throw_attempts_per_game'], player['3s_made_per_game'], player['rebounds_per_game'], player['assists_per_game'], player['steals_per_game'], player['blocks_per_game'], player['turnovers_per_game'], player['points_per_game']))
+        '''.format(table_name), (player['name'], player['games'], player['field_goal_made_per_game'], player['field_goal_attempts_per_game'], player['free_throw_made_per_game'], player['free_throw_attempts_per_game'], player['threes_made_per_game'], player['rebounds_per_game'], player['assists_per_game'], player['steals_per_game'], player['blocks_per_game'], player['turnovers_per_game'], player['points_per_game']))
 
     conn.commit()
     conn.close()
