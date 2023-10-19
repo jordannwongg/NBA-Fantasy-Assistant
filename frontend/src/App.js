@@ -26,18 +26,19 @@ function NBAFantasyAssistant() {
 
   const titleStyle = {
     textAlign: 'center',
-    marginBottom: '20px'
+    marginBottom: '20px',
+    fontFamily: 'Playfair'
   };
 
   const tableContainerStyle = {
     maxHeight: '90vh',
-    overflow: 'auto',
+    overflow: 'auto'
   };
 
   return (
     <div className="App" style={containerStyle}>
       <h1 style={titleStyle}>
-        {`${parseInt(year) - 1}-${year} NBA Fantasy Assistant`}
+       {`Fantasy Basketball '${(parseInt(year) - 1).toString().slice(-2)}-'${year.slice(-2)} Rankings`}
       </h1>
       <Paper>
         <div style={tableContainerStyle}>
