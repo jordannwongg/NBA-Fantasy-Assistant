@@ -3,13 +3,17 @@ import { Table, TableBody, TableCell, TableHead, TableRow, Paper } from '@materi
 
 function App() {
   const [players, setPlayers] = useState([]);
+  const [year, setYear] = useState(null);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/stats/2023")
+    const fetchURL = "http://127.0.0.1:5000/2023";
+    fetch(fetchURL)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
         setPlayers(data);
+        const extractedYear = fetchURL.split('/').pop();
+        setYear(extractedYear);
       });
   }, []);
 
@@ -33,7 +37,9 @@ function App() {
 
   return (
     <div className="App" style={containerStyle}>
-      <h1 style={titleStyle}>NBA Fantasy Assistant</h1>
+      <h1 style={titleStyle}>
+        {`${parseInt(year) - 1}-${year} NBA Fantasy Assistant`}
+      </h1>
       <Paper>
         <div style={tableContainerStyle}>
           <Table stickyHeader>
