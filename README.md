@@ -8,6 +8,9 @@ A web based application that helps display and visualize the best picks for your
 
 # Tech Stack
 Python
+
 React.js
+
 CSS
+
 Material-UI
