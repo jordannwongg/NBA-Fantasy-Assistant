@@ -4,6 +4,8 @@ import { Table, TableBody, TableCell, TableHead, TableRow, Paper } from '@materi
 
 function NBAFantasyAssistant() {
   const [players, setPlayers] = useState([]);
+  const [sortKey, setSortKey] = useState(null); 
+  const [sortDirection, setSortDirection] = useState('asc'); 
   const { year } = useParams();
 
   useEffect(() => {
@@ -15,6 +17,26 @@ function NBAFantasyAssistant() {
         setPlayers(data);
       });
   }, [year]);
+
+  const handleSort = (key) => {
+    if (sortKey === key) {
+      setSortDirection((prevDirection) => (prevDirection === 'desc' ? 'asc' : 'desc'));
+    } else {
+      setSortKey(key);
+      setSortDirection('desc');
+    }
+  };
+
+  const sortedPlayers = [...players].sort((a, b) => {
+    if (sortKey) {
+      if (sortDirection === 'desc') {
+        return b[sortKey] - a[sortKey];
+      } else {
+        return a[sortKey] - b[sortKey];
+      }
+    }
+    return 0; 
+  });
 
   const containerStyle = {
     display: 'flex',
@@ -35,6 +57,20 @@ function NBAFantasyAssistant() {
     overflow: 'auto'
   };
 
+  const activeColumnStyle = {
+    cursor: 'pointer',
+    color: 'blue'
+  };
+
+  const getColumnStyle = (key) => sortKey === key ? activeColumnStyle : { cursor: 'pointer' };
+
+  const getSortedSymbol = (key) => {
+    if (sortKey === key) {
+      return sortDirection === 'desc' ? ' ↓' : ' ↑';
+    }
+    return '';
+  };
+
   return (
     <div className="App" style={containerStyle}>
       <h1 style={titleStyle}>
@@ -47,19 +83,19 @@ function NBAFantasyAssistant() {
               <TableRow>
                 <TableCell>Rank</TableCell>
                 <TableCell>Name</TableCell>
-                <TableCell>3s Made</TableCell>
-                <TableCell>Points</TableCell>
-                <TableCell>Rebounds</TableCell>
-                <TableCell>Assists</TableCell>
-                <TableCell>Steals</TableCell>
-                <TableCell>Blocks</TableCell>
-                <TableCell>Turnovers</TableCell>
-                <TableCell>Fantasy Points</TableCell>
-                <TableCell>Total Fantasy Points</TableCell>
+                <TableCell style={getColumnStyle('threes_made_per_game')} onClick={() => handleSort('threes_made_per_game')}>3s Made{getSortedSymbol('threes_made_per_game')}</TableCell>
+                <TableCell style={getColumnStyle('points_per_game')} onClick={() => handleSort('points_per_game')}>Points{getSortedSymbol('points_per_game')}</TableCell>
+                <TableCell style={getColumnStyle('rebounds_per_game')} onClick={() => handleSort('rebounds_per_game')}>Rebounds{getSortedSymbol('rebounds_per_game')}</TableCell>
+                <TableCell style={getColumnStyle('assists_per_game')} onClick={() => handleSort('assists_per_game')}>Assists{getSortedSymbol('assists_per_game')}</TableCell>
+                <TableCell style={getColumnStyle('steals_per_game')} onClick={() => handleSort('steals_per_game')}>Steals{getSortedSymbol('steals_per_game')}</TableCell>
+                <TableCell style={getColumnStyle('blocks_per_game')} onClick={() => handleSort('blocks_per_game')}>Blocks{getSortedSymbol('blocks_per_game')}</TableCell>
+                <TableCell style={getColumnStyle('turnovers_per_game')} onClick={() => handleSort('turnovers_per_game')}>Turnovers{getSortedSymbol('turnovers_per_game')}</TableCell>
+                <TableCell style={getColumnStyle('avg_fantasy_points')} onClick={() => handleSort('avg_fantasy_points')}>Fantasy Points{getSortedSymbol('avg_fantasy_points')}</TableCell>
+                <TableCell style={getColumnStyle('total_fantasy_points')} onClick={() => handleSort('total_fantasy_points')}>Total Fantasy Points{getSortedSymbol('total_fantasy_points')}</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {players.map((player) => (
+              {sortedPlayers.map((player) => (
                 <TableRow key={player.Rank}>
                   <TableCell>{player.Rank}</TableCell>
                   <TableCell>{player.name}</TableCell>
