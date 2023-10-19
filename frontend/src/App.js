@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, useParams, Navigate } from 'react-router-dom';
 import { Table, TableBody, TableCell, TableHead, TableRow, Paper } from '@material-ui/core';
 
-function App() {
+function NBAFantasyAssistant() {
   const [players, setPlayers] = useState([]);
-  const [year, setYear] = useState(null);
+  const { year } = useParams();
 
   useEffect(() => {
-    const fetchURL = "http://127.0.0.1:5000/2023";
+    const fetchURL = `http://127.0.0.1:5000/${year}`;
     fetch(fetchURL)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
         setPlayers(data);
-        const extractedYear = fetchURL.split('/').pop();
-        setYear(extractedYear);
       });
-  }, []);
+  }, [year]);
 
   const containerStyle = {
     display: 'flex',
@@ -79,6 +78,17 @@ function App() {
         </div>
       </Paper>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+       <Route path="/:year" element={<NBAFantasyAssistant />} />
+       <Route path="/" element={<Navigate to="/2023" replace />} />
+      </Routes>
+    </Router>
   );
 }
 
