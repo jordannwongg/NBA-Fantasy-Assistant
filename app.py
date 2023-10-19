@@ -10,7 +10,7 @@ app = Flask(__name__)
 def index():
     return "Welcome to NBA Fantasy Assistant! \
         An application made with the purpose of helping users with NBA Fantasy picks! \
-        Made by Jordan Wong :D Navigate to /stats/{input year}"
+        Made by Jordan Wong :D Add and navigate /stats/2023 to your url!"
 
 @app.route('/stats/<int:year>')
 def get_stats(year):
