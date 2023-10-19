@@ -13,46 +13,64 @@ function App() {
       });
   }, []);
 
+  const containerStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100vh'
+  };
+
+  const titleStyle = {
+    textAlign: 'center',
+    marginBottom: '20px'
+  };
+
+  const tableContainerStyle = {
+    maxHeight: '90vh',
+    overflow: 'auto',
+  };
+
   return (
-    <div className="App">
-      <h1>NBA Fantasy Assistant</h1>
-      <Paper style={{ margin: '20px', overflow: 'auto' }}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Rank</TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell>3s Made</TableCell>
-              <TableCell>Points</TableCell>
-              <TableCell>Rebounds</TableCell>
-              <TableCell>Assists</TableCell>
-              <TableCell>Steals</TableCell>
-              <TableCell>Blocks</TableCell>
-              <TableCell>Turnovers</TableCell>
-              <TableCell>Fantasy Points</TableCell>
-              <TableCell>Total Fantasy Points</TableCell>
-              {/* Add other columns as needed */}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {players.map((player) => (
-              <TableRow key={player.Rank}>
-                <TableCell>{player.Rank}</TableCell>
-                <TableCell>{player.name}</TableCell>
-                <TableCell>{player.threes_made_per_game}</TableCell>
-                <TableCell>{player.points_per_game}</TableCell>
-                <TableCell>{player.rebounds_per_game}</TableCell>
-                <TableCell>{player.assists_per_game}</TableCell>
-                <TableCell>{player.steals_per_game}</TableCell>
-                <TableCell>{player.blocks_per_game}</TableCell>
-                <TableCell>{player.turnovers_per_game}</TableCell>
-                <TableCell>{player.avg_fantasy_points}</TableCell>
-                <TableCell>{player.total_fantasy_points}</TableCell>
-                {/* Add other data cells as needed */}
+    <div className="App" style={containerStyle}>
+      <h1 style={titleStyle}>NBA Fantasy Assistant</h1>
+      <Paper>
+        <div style={tableContainerStyle}>
+          <Table stickyHeader>
+            <TableHead>
+              <TableRow>
+                <TableCell>Rank</TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell>3s Made</TableCell>
+                <TableCell>Points</TableCell>
+                <TableCell>Rebounds</TableCell>
+                <TableCell>Assists</TableCell>
+                <TableCell>Steals</TableCell>
+                <TableCell>Blocks</TableCell>
+                <TableCell>Turnovers</TableCell>
+                <TableCell>Fantasy Points</TableCell>
+                <TableCell>Total Fantasy Points</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+            </TableHead>
+            <TableBody>
+              {players.map((player) => (
+                <TableRow key={player.Rank}>
+                  <TableCell>{player.Rank}</TableCell>
+                  <TableCell>{player.name}</TableCell>
+                  <TableCell>{player.threes_made_per_game}</TableCell>
+                  <TableCell>{player.points_per_game}</TableCell>
+                  <TableCell>{player.rebounds_per_game}</TableCell>
+                  <TableCell>{player.assists_per_game}</TableCell>
+                  <TableCell>{player.steals_per_game}</TableCell>
+                  <TableCell>{player.blocks_per_game}</TableCell>
+                  <TableCell>{player.turnovers_per_game}</TableCell>
+                  <TableCell>{player.avg_fantasy_points}</TableCell>
+                  <TableCell>{player.total_fantasy_points}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
       </Paper>
     </div>
   );
