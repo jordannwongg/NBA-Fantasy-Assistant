@@ -1,10 +1,12 @@
-from flask import Flask
+from flask import Flask, jsonify
+from flask_cors import CORS
 import sqlite3
 import pandas as pd
-from calculate import calculate_fantasy_score
+from calculate import calculate_fantasy_points
 
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/')
 def index():
@@ -20,8 +22,10 @@ def get_stats(year):
     conn.close()
 
     # Calculate fantasy scores and add to dataframe
-    df['avg_fantasy_score'], df['total_fantasy_score'] = zip(*df.apply(calculate_fantasy_score, axis=1))
-    df = df.sort_values(by='total_fantasy_score', ascending=False)
+    df['avg_fantasy_points'], df['total_fantasy_points'] = zip(*df.apply(calculate_fantasy_points, axis=1))
+    df['avg_fantasy_points'] = df['avg_fantasy_points'].round(1)
+    df['total_fantasy_points'] = df['total_fantasy_points'].round()
+    df = df.sort_values(by='total_fantasy_points', ascending=False)
     
     df.drop(columns=['id'], inplace=True)
     df['Rank'] = range(1, len(df) + 1)
@@ -30,7 +34,7 @@ def get_stats(year):
     columns_order = ['Rank'] + [col for col in df if col != 'Rank']
     df = df[columns_order]
     
-    return df.to_html(index=False)
+    return jsonify(df.to_dict(orient='records'))
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=5000)

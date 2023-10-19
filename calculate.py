@@ -1,4 +1,4 @@
-def calculate_fantasy_score(player):
+def calculate_fantasy_points(player):
     # Weights for each category
     weights = {
         'points_per_game': 1,
@@ -14,10 +14,10 @@ def calculate_fantasy_score(player):
         'free_throw_attempts_per_game': -1
     }
 
-    total_score = 0
+    total_fantasy_points = 0
     for category, weight in weights.items():
-        total_score += player[category] * weight * player['games']
+        total_fantasy_points += player[category] * weight * player['games']
 
-    avg_score = total_score / player['games'] if player['games'] != 0 else 0
+    avg_fantasy_points = total_fantasy_points / player['games'] if player['games'] != 0 else 0
 
-    return avg_score, total_score
+    return avg_fantasy_points, total_fantasy_points
