@@ -66,7 +66,7 @@ function NBAFantasyAssistant() {
 
   const getSortedSymbol = (key) => {
     if (sortKey === key) {
-      return sortDirection === 'desc' ? ' ↓' : ' ↑';
+      return sortDirection === 'desc' ? ' ⬇' : ' ⬆';
     }
     return '';
   };
