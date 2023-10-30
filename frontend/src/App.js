@@ -83,6 +83,7 @@ function NBAFantasyAssistant() {
               <TableRow>
                 <TableCell>Rank</TableCell>
                 <TableCell>Name</TableCell>
+                <TableCell style={getColumnStyle('games')} onClick={() => handleSort('games')}>Games{getSortedSymbol('games')}</TableCell>
                 <TableCell style={getColumnStyle('threes_made_per_game')} onClick={() => handleSort('threes_made_per_game')}>3s Made{getSortedSymbol('threes_made_per_game')}</TableCell>
                 <TableCell style={getColumnStyle('points_per_game')} onClick={() => handleSort('points_per_game')}>Points{getSortedSymbol('points_per_game')}</TableCell>
                 <TableCell style={getColumnStyle('rebounds_per_game')} onClick={() => handleSort('rebounds_per_game')}>Rebounds{getSortedSymbol('rebounds_per_game')}</TableCell>
@@ -99,6 +100,7 @@ function NBAFantasyAssistant() {
                 <TableRow key={player.Rank}>
                   <TableCell>{player.Rank}</TableCell>
                   <TableCell>{player.name}</TableCell>
+                  <TableCell>{player.games}</TableCell>
                   <TableCell>{player.threes_made_per_game}</TableCell>
                   <TableCell>{player.points_per_game}</TableCell>
                   <TableCell>{player.rebounds_per_game}</TableCell>
