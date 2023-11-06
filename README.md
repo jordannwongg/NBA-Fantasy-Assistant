@@ -14,5 +14,3 @@ React.js
 CSS
 
 Material-UI
-
-Hi Jordan
